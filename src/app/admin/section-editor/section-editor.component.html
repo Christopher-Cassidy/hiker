@@ -1,0 +1,21 @@
+<div *ngIf="hikeSection">
+  <label>Title:
+    <input [(ngModel)]="hikeSection.title" placeholder="hike title" name="title" />
+  </label>
+  
+  <label>Description:
+    <input type="text" [(ngModel)]="hikeSection.description" maxlength="4000" />
+  </label>
+
+  <label>Sections:
+    <input type="number" [(ngModel)]="hikeSection.sections" />
+  </label>
+
+  <label>Distance:
+    <input type="number" [(ngModel)]="hikeSection.distance" />
+  </label>
+  
+  <!-- <label>Map Data:
+    <input type="file" [(ngModel)]="hikeSection.mapData" />
+  </label> -->
+</div>

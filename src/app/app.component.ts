@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HikeService } from './services/hike.service';
 
 @Component({
   selector: 'app-root',
