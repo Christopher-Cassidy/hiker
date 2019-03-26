@@ -1,19 +1,25 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
 import { HikeSection } from 'src/app/models/HikeSection';
 import { ActivatedRoute } from '@angular/router';
-import { HikeServiceMock } from 'src/app/services/hike.service.mock';
+import { HikeService } from 'src/app/services/hike.service';
+
 
 @Component({
   selector: 'app-section-editor',
   templateUrl: './section-editor.component.html',
-  styleUrls: ['./section-editor.component.css']
+  styleUrls: ['./section-editor.component.scss']
 })
 export class SectionEditorComponent implements OnInit {
+  private sectionId: string;
+  private hikeId: string;
+  
   @Input() hikeSection: HikeSection;
   
   constructor(
     private route: ActivatedRoute,
-    private hikeService: HikeServiceMock
+    private hikeService: HikeService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -21,12 +27,18 @@ export class SectionEditorComponent implements OnInit {
   }
 
   loadHikeSection(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    // this.hikeService.getHikeSection(id)
-    //   .subscribe(hike => this.hikeSection = hike);
+    this.sectionId = this.route.snapshot.paramMap.get('sectionId');
+    this.hikeId = this.route.snapshot.paramMap.get('hikeId');
+    
+    this.hikeService.getHikeSection(this.hikeId, this.sectionId)
+      .subscribe(hike => this.hikeSection = hike);
   }
 
   save(): void {
-    // this.hikeService.saveHike(this.hike);
+    this.hikeService.saveHikeSection(this.hikeId, this.hikeSection);
   }
+
+  goBack(): void{
+  this.location.back();
+}
 }

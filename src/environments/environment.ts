@@ -13,7 +13,6 @@ export const environment = {
     storageBucket: "hiker-cc.appspot.com",
     messagingSenderId: "1075335095329"
   }
-
 };
 
 /*

@@ -1,3 +1,15 @@
-<p>
-  gallery-editor works!
-</p>
+<div class="gallery-editor dropzone" 
+  appDropZoneDirective 
+  (hovered)="fileUploader.toggleHover($event)" 
+  (dropped)="fileUploader.startUpload($event)"
+  [class.hovering]="isHovering">
+
+  <ul class="gallery">
+    <li *ngFor="let img of images">
+      <img [src]="img.url" title="{{img.title}}" width="90" height="120" />
+      <caption *ngIf="img.description">{{img.description}}</caption>
+    </li>
+  </ul>
+
+  <app-file-upload #fileUploader [path]="galleryPath" (fileUploaded)="onFileUploaded($event)"></app-file-upload>
+</div>

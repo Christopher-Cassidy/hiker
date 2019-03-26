@@ -1,4 +1,7 @@
-export class Hike {
+import { GalleryImage } from "./GalleryImage";
+import { Entity } from "./Entity";
+
+export class Hike extends Entity {
     public id: string;
     public title: string;
     public description: string;
@@ -8,40 +11,6 @@ export class Hike {
     public altitudeGain: number;
     public altitudeLoss: number;
     public difficulty: number;
+    public mapDataUrl: string;
+    public gallery: GalleryImage[];
 }
-
-export let HIKES: Hike[] = [
-    {
-        id: "1234",
-        title: "Mahlerweg",
-        description: "Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, ",
-        stages: 5,
-        mapData: null,
-        distance: 150,
-        altitudeGain: 800,
-        altitudeLoss: 400,
-        difficulty: 4.5
-    },
-    {
-        id: "4321",
-        title: "Wilsons",
-        description: "Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, ",
-        stages: 5,
-        mapData: null,
-        distance: 150,
-        altitudeGain: 800,
-        altitudeLoss: 400,
-        difficulty: 4.5
-    },
-    {
-        id: "8765",
-        title: "Grampians",
-        description: "Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, Lorem ipsum delorem ignorem, ",
-        stages: 5,
-        mapData: null,
-        distance: 150,
-        altitudeGain: 800,
-        altitudeLoss: 400,
-        difficulty: 4.5
-    },
-];

@@ -1,10 +1,14 @@
 import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule, MatInputModule, MatIconModule, MatMenuModule, MatToolbarModule, MatCardModule} from '@angular/material';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
@@ -23,6 +27,13 @@ import { HtmlEditorComponent } from './admin/html-editor/html-editor.component';
 import { GalleryEditorComponent } from './admin/gallery-editor/gallery-editor.component';
 import { HikeComponent } from './hike/hike.component';
 import { environment } from 'src/environments/environment';
+import { MapEditorComponent } from './admin/map-editor/map-editor.component';
+import { AgmCoreModule } from '@agm/core';
+import { FileUploadComponent } from './admin/file-upload/file-upload.component';
+import { DropZoneDirectiveDirective } from './directives/drop-zone-directive.directive';
+import { FileSizePipe } from './pipes/file-size.pipe';
+import { HikeSectionListComponent } from './admin/hike-section-list/hike-section-list.component';
+import { NavComponent } from './nav/nav.component';
 
 export const firebaseConfig = environment.firebaseConfig;
 
@@ -30,10 +41,26 @@ export const firebaseConfig = environment.firebaseConfig;
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+
+    BrowserAnimationsModule,
+    MatButtonModule, 
+    MatCheckboxModule,
+    MatInputModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatCardModule,
+
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
+    AngularFireStorageModule,
+
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAyrpKVNa6KGT2T0LMdjPBZ2yqPDTI9g_U'
+    }),
 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
@@ -53,7 +80,13 @@ export const firebaseConfig = environment.firebaseConfig;
     SectionEditorComponent,
     HtmlEditorComponent,
     GalleryEditorComponent,
-    HikeComponent
+    HikeComponent,
+    MapEditorComponent,
+    FileUploadComponent,
+    DropZoneDirectiveDirective,
+    FileSizePipe,
+    HikeSectionListComponent,
+    NavComponent
   ],
   bootstrap: [ AppComponent ]
 })

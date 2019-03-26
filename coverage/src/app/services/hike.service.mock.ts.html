@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">42.86% </span>
+        <span class="strong">43.48% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>9/21</span>
+        <span class='fraction'>10/23</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">33.33% </span>
+        <span class="strong">30% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/9</span>
+        <span class='fraction'>3/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">43.75% </span>
+        <span class="strong">44.44% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>7/16</span>
+        <span class='fraction'>8/18</span>
       </div>
     </div>
     <p class="quiet">
@@ -89,7 +89,12 @@
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -99,6 +104,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -114,10 +126,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,7 +141,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Injectable } from '@angular/core';
-import { Hike, HIKES } from '../models/Hike';
+import { Hike } from '../models/Hike';
+import { HIKES } from '../models/HikesMock';
 import { IHikeService } from './IHikeService';
 import { Observable } from 'rxjs';
 import *as _ from 'lodash';
@@ -142,11 +151,18 @@ import *as _ from 'lodash';
   providedIn: 'root'
 })
 export class HikeServiceMock implements IHikeService {
+<span class="fstat-no" title="function not covered" >  getHikeSections(</span>id: string): Observable&lt;import("../models/HikeSection").HikeSection&gt; {
+<span class="cstat-no" title="statement not covered" >    throw new Error("Method not implemented.");</span>
+  }
+<span class="fstat-no" title="function not covered" >  public g</span>etHikes(): Observable&lt;Hike[]&gt; {
+<span class="cstat-no" title="statement not covered" >    return Observable.create(<span class="fstat-no" title="function not covered" >obs </span>=&gt; <span class="cstat-no" title="statement not covered" >obs.next(HIKES));</span></span>
+  }
+&nbsp;
   public getHike(id: string): Observable&lt;Hike&gt; {
     return Observable.create(obs =&gt; obs.next(_.find(HIKES, { "id": id })));
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  public s</span>aveHike(hike: Hike): Observable&lt;string&gt; {
+<span class="fstat-no" title="function not covered" >  public s</span>aveHike(hike: Hike): Promise&lt;Hike&gt; {
     var idx = <span class="cstat-no" title="statement not covered" >_.findIndex(HIKES, { "id": hike.id });</span>
 &nbsp;
     if (idx &gt; -1) {
@@ -157,11 +173,7 @@ export class HikeServiceMock implements IHikeService {
 <span class="cstat-no" title="statement not covered" >      HIKES.push(hike);</span>
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return Observable.create(<span class="fstat-no" title="function not covered" >obs </span>=&gt; <span class="cstat-no" title="statement not covered" >obs.next(hike.id));</span></span>
-  }
-&nbsp;
-<span class="fstat-no" title="function not covered" >  public l</span>ist(): Observable&lt;Hike[]&gt; {
-<span class="cstat-no" title="statement not covered" >    return Observable.create(<span class="fstat-no" title="function not covered" >obs </span>=&gt; <span class="cstat-no" title="statement not covered" >obs.next(HIKES));</span></span>
+<span class="cstat-no" title="statement not covered" >    return new Promise(<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>ike);</span></span>
   }
 &nbsp;
   constructor() { }
@@ -181,7 +193,7 @@ export class HikeServiceMock implements IHikeService {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Mar 08 2019 15:06:13 GMT+0100 (W. Europe Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Mar 22 2019 18:04:29 GMT+0100 (W. Europe Standard Time)
 </div>
 </div>
 <script src="..\..\..\prettify.js"></script>

@@ -1,5 +1,6 @@
-export class HikeSection {
-    id: string;
+import { Entity } from "./Entity";
+
+export class HikeSection extends Entity {
     title: string;
     description: string;
     nextStages: Array<string>;

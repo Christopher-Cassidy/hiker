@@ -1,13 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Hike, HIKES } from '../models/Hike';
+import { Hike } from '../models/Hike';
+import { HIKES } from '../models/HikesMock';
 import { IHikeService } from './IHikeService';
 import { Observable } from 'rxjs';
 import *as _ from 'lodash';
+import { HikeSection } from '../models/HikeSection';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HikeServiceMock implements IHikeService {
+  
+  public saveHikeSection(hikeId: string, hikeSection: HikeSection): Promise<HikeSection> {
+    throw new Error("Method not implemented.");
+  }
+  
+  public getHikeSection(hikeId: string, sectionId: string): Observable<HikeSection> {
+    throw new Error("Method not implemented.");
+  }
+
+  public getHikeSections(id: string): Observable<HikeSection[]> {
+    throw new Error("Method not implemented.");
+  }
+  
   public getHikes(): Observable<Hike[]> {
     return Observable.create(obs => obs.next(HIKES));
   }
@@ -16,7 +31,7 @@ export class HikeServiceMock implements IHikeService {
     return Observable.create(obs => obs.next(_.find(HIKES, { "id": id })));
   }
 
-  public saveHike(hike: Hike): Observable<string> {
+  public saveHike(hike: Hike): Promise<Hike> {
     var idx = _.findIndex(HIKES, { "id": hike.id });
 
     if (idx > -1) {
@@ -27,11 +42,7 @@ export class HikeServiceMock implements IHikeService {
       HIKES.push(hike);
     }
 
-    return Observable.create(obs => obs.next(hike.id));
-  }
-
-  public list(): Observable<Hike[]> {
-    return Observable.create(obs => obs.next(HIKES));
+    return new Promise(() => hike);
   }
 
   constructor() { }

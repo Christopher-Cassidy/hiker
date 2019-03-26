@@ -1,0 +1,10 @@
+$card-bg: #fff;
+
+.gallery-editor
+  {
+      .gallery{
+          img { width: 90px; height: 120px; }
+          ul { margin: 0; list-style: none; width: 600px; padding: 10px; }
+          li {display: inline-block; padding: 5px;  margin: 10px; background: $card-bg; }
+      }
+    }

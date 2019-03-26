@@ -1,21 +1,40 @@
-<div *ngIf="hike">
-  <label>Title:
-    <input [(ngModel)]="hike.title" placeholder="hike title" name="title" />
-  </label>
-  
-  <label>Description:
-    <input type="text" [(ngModel)]="hike.description" maxlength="4000" onchange="save" />
-  </label>
+<form #f="ngForm" (ngSubmit)="save()" *ngIf="hike">
+  <div>
+    <label>Title:
+      <input [(ngModel)]="hike.title" placeholder="hike title" name="title" (keypress)="modelChange($event)" (blur)="modelChange($event)" />
+    </label>
+  </div>
 
-  <label>Sections:
-    <input type="number" [(ngModel)]="hike.sections" />
-  </label>
+  <div>
+    <label>Description:
+      <input type="text" [(ngModel)]="hike.description" maxlength="4000" name="description" (keypress)="modelChange($event)"
+        (blur)="modelChange($event)" />
+    </label>
+  </div>
 
-  <label>Distance:
-    <input type="number" [(ngModel)]="hike.distance" />
-  </label>
+  <div>
+    <label>Sections:
+      <input type="number" [(ngModel)]="hike.sections" name="sections" (keypress)="modelChange($event)" (blur)="modelChange($event)" />
+    </label>
+  </div>
+
+  <div>
+    <label>Distance:
+      <input type="number" [(ngModel)]="hike.distance" name="distance" (change)="modelChange($event)" (blur)="modelChange($event)" />
+    </label>
+  </div>
   
-  <!-- <label>Map Data:
-    <input type="file" [(ngModel)]="hike.mapData" />
-  </label> -->
-</div>
+  <div>
+    <label for="sections">Sections:</label>
+    <app-hike-section-list name="sections" [hikeId]="hike.id"></app-hike-section-list>
+  </div>
+
+  <label>Map Data: </label>
+  <app-file-upload [path]="hike.id" [defaultFileName]="hike-trail" (fileUploaded)="onFileUploaded($event)"></app-file-upload>
+
+  <app-gallery-editor [images]="hike.gallery" [galleryPath]="hike.id" (galleryChanged)="onGalleryChanged($event)"></app-gallery-editor>
+
+  <button type="submit" title="Save">Save</button>
+
+  <app-map-editor [mapDataUrl]="hike.mapDataUrl"></app-map-editor>
+</form>

@@ -1,21 +1,16 @@
-<div *ngIf="hikeSection">
-  <label>Title:
-    <input [(ngModel)]="hikeSection.title" placeholder="hike title" name="title" />
-  </label>
-  
-  <label>Description:
-    <input type="text" [(ngModel)]="hikeSection.description" maxlength="4000" />
-  </label>
+<form #f="ngForm" *ngIf="hikeSection" name="section-form" class="hike-section__editor" (ngSubmit)="save()">
+  <mat-form-field class="form__input--text">
+    <input matInput name="title" [(ngModel)]="hikeSection.title" placeholder="section title" required />
+  </mat-form-field>
 
-  <label>Sections:
-    <input type="number" [(ngModel)]="hikeSection.sections" />
-  </label>
+  <mat-form-field class="form__input--textarea">
+    <textarea matInput name="description" [(ngModel)]="hikeSection.description" placeholder="section description"></textarea>
+  </mat-form-field>
 
-  <label>Distance:
-    <input type="number" [(ngModel)]="hikeSection.distance" />
-  </label>
-  
-  <!-- <label>Map Data:
-    <input type="file" [(ngModel)]="hikeSection.mapData" />
-  </label> -->
-</div>
+  <mat-form-field class="form__input--number">
+    <input matInput name="distance" [(ngModel)]="hikeSection.distance" type="number" placeholder="distance" />
+  </mat-form-field>
+
+  <button mat-button type="submit">save</button>
+  <button (click)="goBack()">go back</button>
+</form>
