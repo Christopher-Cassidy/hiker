@@ -15,7 +15,7 @@ import { Entity } from '../models/Entity';
   providedIn: 'root'
 })
 export class HikeService implements IHikeService {
-  
+
   items: AngularFirestoreCollection<Hike>;
 
   getHikes(): Observable<Hike[]> {
@@ -40,7 +40,7 @@ export class HikeService implements IHikeService {
         return hike;
       }),
       tap(hike => console.log('[HikeService] Fetch result', hike))
-      );
+    );
   }
 
   saveHike(hike: Hike): Promise<Hike> {
@@ -66,7 +66,7 @@ export class HikeService implements IHikeService {
   }
 
   saveHikeSection(hikeId: string, hikeSection: HikeSection): Promise<HikeSection> {
-    return this.save(`hikes/${hikeId}/sections/${hikeSection.id}`, hikeSection);
+    return this.save<HikeSection>(`hikes/${hikeId}/sections`, hikeSection);
   }
 
   getHikeSections(id: string): Observable<HikeSection[]> {
@@ -88,7 +88,11 @@ export class HikeService implements IHikeService {
     return this.db
       .doc<HikeSection>(`hikes/${hikeId}/sections/${sectionId}`)
       .valueChanges().pipe(
-        map(section => { section.id = sectionId; return section;}));
+        map(section => {
+          section = section || new HikeSection();
+          section.id = sectionId;
+          return section;
+        }));
   }
 
 
@@ -138,26 +142,29 @@ export class HikeService implements IHikeService {
   }
 
   private save<T extends Entity>(path: string, data: any): Promise<T> {
-    const doc = this.db.doc(path)
+    const doc = this.db.doc(`${path}/${data.id}`)
       .snapshotChanges()
       .pipe(take(1))
       .toPromise();
-  
+
     return doc.then((snap: Action<DocumentSnapshotDoesNotExist | DocumentSnapshotExists<T>>) => {
-      return snap.payload.exists ? this.update(path, data) : this.create(path, data);
+      return snap.payload.exists ? this.update<T>(path, data) : this.create<T>(path, data);
     });
   }
 
   private update<T extends Entity>(path: string, data: T): Promise<T> {
-    console.log('[HikeService] update entity', {path: path, entity: data});
+    console.log('[HikeService] update entity', { path: path, entity: data });
 
-    return this.db.doc(path).update(data).then(() => data); 
+    return this.db.doc(`${path}/${data.id}`).update(data).then(() => data);
   }
   private create<T extends Entity>(path: string, data: T): Promise<T> {
-    console.log('[HikeService] create entity', {path: path, entity: data});
-    
+    console.log('[HikeService] create entity', { path: path, entity: data });
+
     return this.db.collection(path)
-        .add(data)
-        .then(doc => { data.id = doc.id; return data; });
+      .add(JSON.parse(JSON.stringify(data)))
+      .then(doc => { 
+        data.id = doc.id; 
+        return data; 
+      });
   }
 }

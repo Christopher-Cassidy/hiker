@@ -13,9 +13,9 @@ import { HikeService } from 'src/app/services/hike.service';
 export class SectionEditorComponent implements OnInit {
   private sectionId: string;
   private hikeId: string;
-  
+
   @Input() hikeSection: HikeSection;
-  
+
   constructor(
     private route: ActivatedRoute,
     private hikeService: HikeService,
@@ -29,16 +29,21 @@ export class SectionEditorComponent implements OnInit {
   loadHikeSection(): void {
     this.sectionId = this.route.snapshot.paramMap.get('sectionId');
     this.hikeId = this.route.snapshot.paramMap.get('hikeId');
-    
+
     this.hikeService.getHikeSection(this.hikeId, this.sectionId)
       .subscribe(hike => this.hikeSection = hike);
   }
 
   save(): void {
-    this.hikeService.saveHikeSection(this.hikeId, this.hikeSection);
+    this
+      .hikeService.saveHikeSection(this.hikeId, this.hikeSection)
+      .then(section => {
+        this.sectionId = section.id;
+      this.location.replaceState(`/admin/hikes/${this.hikeId}/section/${this.sectionId}`);
+    });
   }
 
-  goBack(): void{
-  this.location.back();
-}
+  goBack(): void {
+    this.location.back();
+  }
 }
