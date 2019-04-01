@@ -1,8 +1,20 @@
 <div *ngIf="hike">
-  <h2>Title:
-    <span>{{hike.title}}</span>
-  </h2>
-  
-  <p>{{hike.description}}</p>
+  <mat-card>
+    <mat-card-title>{{hike.title}}</mat-card-title>
+    <mat-card-content>
+      <div [innerHtml]="hike.description"></div>
+      <div>
+        <app-gallery [images]="hike.gallery"></app-gallery>
+      </div>
+      <div>
+          <app-sections [hikeId]="hike.id"></app-sections>
+        </div>
+    </mat-card-content>
+  </mat-card>
 
+  <div class="map-container">
+    <agm-map>
+      <agm-kml-layer [url]="hike.mapDataUrl"></agm-kml-layer>
+    </agm-map>
+  </div>
 </div>

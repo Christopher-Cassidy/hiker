@@ -1,0 +1,13 @@
+mat-card {
+  width: 300px;
+  max-width: 100%;
+  margin: 10px;
+  display: inline-block;
+  vertical-align: top;
+
+  .gallery { border-top: 1px solid #ababab; margin-top: 10px; padding: 10px 0;
+    img {
+      display: inline-block; margin: 5px;
+    }
+  }
+}

@@ -1,16 +1,21 @@
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mat-app-background">
-  
-  <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
-    <app-nav></app-nav>
-  </header>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="over" [(opened)]="opened" fixedTopGap="56">
+    <app-side-nav (toggleSidenav)="sidenav.toggle()"></app-side-nav>
+  </mat-sidenav>
 
-  <main class="mdl-layout__content mdl-color--grey-100">
-    <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
-      <router-outlet></router-outlet>
-    </div>
-  </main>
+  <mat-sidenav-content>
+    <header>
+      <app-nav (toggleSidenav)="sidenav.toggle()"></app-nav>
+    </header>
 
-  <footer class="mdl-layout__footer mdl-color--grey-700">
-    <app-messages></app-messages>
-  </footer>
-</div>
+    <main class="mdl-layout__content mdl-color--grey-100">
+      <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+
+    <footer class="mdl-layout__footer mdl-color--grey-700">
+      <app-messages></app-messages>
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

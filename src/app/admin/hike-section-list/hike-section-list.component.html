@@ -1,8 +1,9 @@
 <div class="col-6-xs">
 
-<mat-card *ngFor="let section of sections" (click)="sectionClick(section)">
-    <img mat-card-image *ngIf="section.image" src="{{section.image}}"/>
+  <mat-card *ngFor="let section of sections" (click)="sectionClick(section)">
+    <img mat-card-image *ngIf="section.image" src="{{section.image}}" />
     <mat-card-title>{{section.title}}</mat-card-title>
     <mat-card-content>{{section.description}}</mat-card-content>
-</mat-card>
+  </mat-card>
+  
 </div>

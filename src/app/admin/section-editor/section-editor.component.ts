@@ -4,7 +4,6 @@ import { HikeSection } from 'src/app/models/HikeSection';
 import { ActivatedRoute } from '@angular/router';
 import { HikeService } from 'src/app/services/hike.service';
 
-
 @Component({
   selector: 'app-section-editor',
   templateUrl: './section-editor.component.html',

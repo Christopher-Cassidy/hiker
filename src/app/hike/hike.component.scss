@@ -1,0 +1,12 @@
+mat-card
+{ width: 300px; z-index: 10;}
+.map-container {     
+    position: absolute;
+    z-index: 0;
+    top: 64px; bottom: 0; left: 0; right: 0;
+}
+agm-map {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }

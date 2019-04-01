@@ -1,0 +1,13 @@
+<mat-card *ngFor="let hike of hikes" [routerLink]="['/hikes',hike.id]">
+  <mat-card-title>{{hike.title}}</mat-card-title>
+  <mat-card-content>
+    <div>
+      <p>
+        {{hike.description}}
+      </p>
+    </div>
+    <div class="gallery">
+        <img mat-card-sm-image *ngFor="let img of hike.gallery | slice:0:3" [src]="img.url">
+    </div>
+  </mat-card-content>
+</mat-card>

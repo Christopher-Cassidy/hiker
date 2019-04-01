@@ -1,6 +1,26 @@
 <mat-toolbar color="primary" role="heading">
   <mat-toolbar-row>
-    <img src="images/firebase-logo.png" class="nav__logo" />
-    <h1 class="nav__title">Hikes</h1>
+    <button class="sidenav-toggle mat-button" (click)="toggle($event)">
+      <span class="mat-button-wrapper">
+        <mat-icon _ngcontent-c13="" class="mat-icon notranslate material-icons mat-icon-no-color" role="img"
+          aria-hidden="true">menu</mat-icon>
+      </span>
+      <div class="mat-button-ripple mat-ripple" matripple=""></div>
+    </button>
+
+    <div *ngIf="navigation.headings" class="nav__heading">
+        <h1 class="nav__heading--title" [routerLink]="[navigation.headings.TitleLinkUrl]" routerLinkActive="router-link-active" >{{navigation.headings.Title}}</h1>   
+      <h2 class="nav__heading--sub-title" [routerLink]="[navigation.headings.SubTitleLinkUrl]" routerLinkActive="router-link-active" >{{navigation.headings.SubTitle}}</h2>
+    </div>
+
+    <span class="nav--right"></span>
+
+    <span>
+
+      <a [routerLink]="['/']" class="nav__brand">
+        <h1 class="nav__title">HIKER</h1>
+        <img src="images/hiker.png" class="nav__logo" height="56" style="padding: 0 20px;" />
+      </a>
+    </span>
   </mat-toolbar-row>
 </mat-toolbar>

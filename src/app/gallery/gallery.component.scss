@@ -1,0 +1,9 @@
+.gallery__container {
+  display: flex;
+  flex-direction: row;
+
+  mat-card {
+    width: 300px;
+    margin: 10px;
+  }
+}

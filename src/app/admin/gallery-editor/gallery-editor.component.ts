@@ -14,6 +14,8 @@ export class GalleryEditorComponent implements OnInit {
   // Gallery items changed
   @Output() galleryChanged = new EventEmitter<GalleryImage[]>();
 
+  isHovering: boolean;
+  
   constructor() { }
 
   ngOnInit() {

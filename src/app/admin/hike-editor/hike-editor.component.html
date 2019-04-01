@@ -1,40 +1,52 @@
 <form #f="ngForm" (ngSubmit)="save()" *ngIf="hike">
   <div>
-    <label>Title:
-      <input [(ngModel)]="hike.title" placeholder="hike title" name="title" (keypress)="modelChange($event)" (blur)="modelChange($event)" />
-    </label>
+    <mat-form-field class="form__input--text">
+      <input matInput name="title" [(ngModel)]="hike.title" placeholder="Hike Title" required
+        (keypress)="modelChange($event)" (blur)="modelChange($event)" />
+    </mat-form-field>
   </div>
 
   <div>
-    <label>Description:
-      <input type="text" [(ngModel)]="hike.description" maxlength="4000" name="description" (keypress)="modelChange($event)"
-        (blur)="modelChange($event)" />
-    </label>
+    <button type="submit" title="Save">Save</button>
   </div>
 
-  <div>
-    <label>Sections:
-      <input type="number" [(ngModel)]="hike.sections" name="sections" (keypress)="modelChange($event)" (blur)="modelChange($event)" />
-    </label>
-  </div>
+  <mat-tab-group>
+    <mat-tab label="Description">
+      <label>Description</label>
+      <ckeditor name="description" [(ngModel)]="hike.description" [editor]="Editor"></ckeditor>
+    </mat-tab>
+    <mat-tab label="Stats">
+      <div>
+        <label>Sections:
+          <input type="number" [(ngModel)]="hike.sections" name="sections" (keypress)="modelChange($event)"
+            (blur)="modelChange($event)" />
+        </label>
+      </div>
 
-  <div>
-    <label>Distance:
-      <input type="number" [(ngModel)]="hike.distance" name="distance" (change)="modelChange($event)" (blur)="modelChange($event)" />
-    </label>
-  </div>
-  
-  <div>
-    <label for="sections">Sections:</label>
-    <app-hike-section-list name="sections" [hikeId]="hike.id"></app-hike-section-list>
-  </div>
+      <div>
+        <label>Distance:
+          <input type="number" [(ngModel)]="hike.distance" name="distance" (change)="modelChange($event)"
+            (blur)="modelChange($event)" />
+        </label>
+      </div>
+    </mat-tab>
 
-  <label>Map Data: </label>
-  <app-file-upload [path]="hike.id" [defaultFileName]="hike-trail" (fileUploaded)="onFileUploaded($event)"></app-file-upload>
+    <mat-tab label="Sections">
+      <div>
+        <label for="sections">Sections:</label>
+        <app-hike-section-list name="sections" [hikeId]="hike.id"></app-hike-section-list>
+      </div>
+    </mat-tab>
 
-  <app-gallery-editor [images]="hike.gallery" [galleryPath]="hike.id" (galleryChanged)="onGalleryChanged($event)"></app-gallery-editor>
+    <mat-tab label="Gallery">
+      <app-gallery-editor [images]="hike.gallery" [galleryPath]="hike.id" (galleryChanged)="onGalleryChanged($event)">
+      </app-gallery-editor>
+    </mat-tab>
+    <mat-tab label="Map"> Content 3
+      <app-file-upload [path]="hike.id" [defaultFileName]="hike-trail" (fileUploaded)="onFileUploaded($event)">
+      </app-file-upload>
+      <app-map-editor [mapDataUrl]="hike.mapDataUrl"></app-map-editor>
+    </mat-tab>
+  </mat-tab-group>
 
-  <button type="submit" title="Save">Save</button>
-
-  <app-map-editor [mapDataUrl]="hike.mapDataUrl"></app-map-editor>
 </form>

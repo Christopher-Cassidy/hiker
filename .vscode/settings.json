@@ -1,4 +1,4 @@
 {
     "appService.deploySubpath": "dist",
-    "appService.defaultWebAppToDeploy": "/subscriptions/b9dd1e44-c691-4963-a5b0-55ab40157972/resourceGroups/cc-ng-tutorial-we-temp-rg/providers/Microsoft.Web/sites/cc-ng-tutorial-we-temp-app"
+    "appService.defaultWebAppToDeploy": "/subscriptions/03b883dd-d8c0-4545-ad96-294b6b63b6d0/resourceGroups/cc-hiker-temp-we-rg/providers/Microsoft.Web/sites/cc-hiker-temp-we-webapp"
 }

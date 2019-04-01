@@ -1,0 +1,6 @@
+    <mat-card *ngFor="let section of sections" [routerLink]="['/hikes', hikeId, 'section', section.id]">
+      <img mat-card-image *ngIf="section.image" src="{{section.image}}" />
+      <mat-card-title>{{section.title}}</mat-card-title>
+      <mat-card-content>{{section.description}}</mat-card-content>
+    </mat-card>
+  

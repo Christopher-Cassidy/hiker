@@ -5,8 +5,8 @@ import { HeroSearchComponent } from '../hero-search/hero-search.component';
 
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { HEROES } from '../mock-heroes';
-import { HeroService } from '../hero.service';
+import { HEROES } from '../models/mock-heroes';
+import { HeroService } from '../services/hero.service';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;

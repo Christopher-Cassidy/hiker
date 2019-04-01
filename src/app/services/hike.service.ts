@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Hike } from '../models/Hike';
 import { IHikeService } from './IHikeService';
 import { Observable, of, from, pipe } from 'rxjs';
-import { AngularFirestore, AngularFirestoreCollection, DocumentData, Action, DocumentSnapshotDoesNotExist, DocumentSnapshotExists } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, Action, DocumentSnapshotDoesNotExist, DocumentSnapshotExists } from '@angular/fire/firestore';
 import { map, tap, take } from 'rxjs/operators';
 import { GalleryImage } from '../models/GalleryImage';
 import { DocumentRef } from '@agm/core/utils/browser-globals';
@@ -96,53 +96,13 @@ export class HikeService implements IHikeService {
   }
 
 
-  private loadGallery(hike: Hike): void {
-    console.log('[HikeService] load gallery for hike', hike.id);
-    hike.gallery = hike.gallery || [];
-
-    this.db.firestore
-      .collection(`hikes/${hike.id}/gallery`)
-      .onSnapshot(snap => {
-        snap.forEach(doc => hike.gallery.push(doc.data() as GalleryImage));
-
-        console.log('[HikeService] gallery loaded', hike.gallery);
-      });
-  }
-
-  private saveGallery(hike: Hike): void {
-    console.log('[] save gallery', hike.gallery);
-    var gallery = hike.gallery;
-
-    var batch = this.db.firestore.batch();
-
-    var prom =
-      this.db
-        .firestore
-        .collection(`hikes/{hike.id}/gallery`)
-        .get()
-        .then(qs => {
-          // Batch-delete existing images
-          qs.forEach(img => batch.delete(img.ref));
-
-          batch.commit().then(() => {
-            console.log('[HikeService] existing gallery cleared');
-
-            gallery.forEach((img, idx) =>
-              this.db
-                .collection(`hikes/${hike.id}/gallery`)
-                .ref
-                .add(img)
-                .then(doc => console.log('[HikeService] added gallery image', doc.id)));
-          })
-        });
-  }
 
   constructor(private db: AngularFirestore) {
     this.items = db.collection('hikes');
   }
 
   private save<T extends Entity>(path: string, data: any): Promise<T> {
-    const doc = this.db.doc(`${path}/${data.id}`)
+    const doc = this.db.doc(`${path}/${data.id || ''}`)
       .snapshotChanges()
       .pipe(take(1))
       .toPromise();
@@ -157,6 +117,7 @@ export class HikeService implements IHikeService {
 
     return this.db.doc(`${path}/${data.id}`).update(data).then(() => data);
   }
+
   private create<T extends Entity>(path: string, data: T): Promise<T> {
     console.log('[HikeService] create entity', { path: path, entity: data });
 
@@ -167,4 +128,46 @@ export class HikeService implements IHikeService {
         return data; 
       });
   }
+
+  
+  // private loadGallery(hike: Hike): void {
+  //   console.log('[HikeService] load gallery for hike', hike.id);
+  //   hike.gallery = hike.gallery || [];
+
+  //   this.db.firestore
+  //     .collection(`hikes/${hike.id}/gallery`)
+  //     .onSnapshot(snap => {
+  //       snap.forEach(doc => hike.gallery.push(doc.data() as GalleryImage));
+
+  //       console.log('[HikeService] gallery loaded', hike.gallery);
+  //     });
+  // }
+
+  // private saveGallery(hike: Hike): void {
+  //   console.log('[] save gallery', hike.gallery);
+  //   var gallery = hike.gallery;
+
+  //   var batch = this.db.firestore.batch();
+
+  //   var prom =
+  //     this.db
+  //       .firestore
+  //       .collection(`hikes/{hike.id}/gallery`)
+  //       .get()
+  //       .then(qs => {
+  //         // Batch-delete existing images
+  //         qs.forEach(img => batch.delete(img.ref));
+
+  //         batch.commit().then(() => {
+  //           console.log('[HikeService] existing gallery cleared');
+
+  //           gallery.forEach((img, idx) =>
+  //             this.db
+  //               .collection(`hikes/${hike.id}/gallery`)
+  //               .ref
+  //               .add(img)
+  //               .then(doc => console.log('[HikeService] added gallery image', doc.id)));
+  //         })
+  //       });
+  // }
 }

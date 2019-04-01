@@ -6,6 +6,7 @@ import { fromEvent, of, Observable, pipe } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap, tap, auditTime, sampleTime } from 'rxjs/operators';
 import { GalleryImage } from 'src/app/models/GalleryImage';
 import { FormGroup } from '@angular/forms';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-hike-editor',
@@ -16,7 +17,7 @@ import { FormGroup } from '@angular/forms';
 export class HikeEditorComponent implements OnInit {
   @Input() hike: Hike;
 
-  private form: FormGroup;
+  public Editor = ClassicEditor;
 
   constructor(
     private route: ActivatedRoute,

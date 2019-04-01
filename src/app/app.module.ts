@@ -7,11 +7,13 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule, MatInputModule, MatIconModule, MatMenuModule, MatToolbarModule, MatCardModule} from '@angular/material';
+import { MatTabsModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatIconModule, MatMenuModule, MatToolbarModule, MatCardModule, MatDividerModule, MatSidenavModule} from '@angular/material';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
+import { InMemoryDataService }  from './services/in-memory-data.service';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -34,6 +36,11 @@ import { DropZoneDirectiveDirective } from './directives/drop-zone-directive.dir
 import { FileSizePipe } from './pipes/file-size.pipe';
 import { HikeSectionListComponent } from './admin/hike-section-list/hike-section-list.component';
 import { NavComponent } from './nav/nav.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { HikesComponent } from './hikes/hikes.component';
+import { SectionsComponent } from './sections/sections.component';
+import { SectionComponent } from './section/section.component';
 
 export const firebaseConfig = environment.firebaseConfig;
 
@@ -46,6 +53,7 @@ export const firebaseConfig = environment.firebaseConfig;
     HttpClientModule,
 
     BrowserAnimationsModule,
+    MatSidenavModule,
     MatButtonModule, 
     MatCheckboxModule,
     MatInputModule,
@@ -53,6 +61,10 @@ export const firebaseConfig = environment.firebaseConfig;
     MatMenuModule,
     MatToolbarModule,
     MatCardModule,
+    MatDividerModule,
+    MatTabsModule,
+
+    CKEditorModule,
 
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
@@ -86,7 +98,12 @@ export const firebaseConfig = environment.firebaseConfig;
     DropZoneDirectiveDirective,
     FileSizePipe,
     HikeSectionListComponent,
-    NavComponent
+    NavComponent,
+    GalleryComponent,
+    SideNavComponent,
+    HikesComponent,
+    SectionsComponent,
+    SectionComponent
   ],
   bootstrap: [ AppComponent ]
 })

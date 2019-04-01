@@ -1,0 +1,7 @@
+<div class="gallery__container">
+  <mat-card *ngFor="let img of images" color="primary">
+    <mat-card-title>{{img.title}}</mat-card-title>
+    <img matCardImage [src]="img.url" />
+    <mat-card-content>{{img.description}}</mat-card-content>
+  </mat-card>
+</div>

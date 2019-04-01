@@ -1,0 +1,102 @@
+/* Custom Material Deisgn Theme - Forest */
+$color_primary: #8bc34a;
+$color_primary_light: #bef67a;
+$color_primary_dark: #5a9216;
+$color_primary_text: #f5f5f5;
+$color_secondary: #FFEB3B;
+$color_secondary_light: #ffff72;
+$color_secondary_dark: #c8b900;
+$color_secondary_text: #455a64;
+$font_family_primary: Roboto,
+Arial,
+Helvetica,
+sans-serif;
+
+/* Master Styles */
+h1 {
+  color: $color_primary_text;
+  font-family: $font_family_primary;
+  font-size: 250%;
+}
+
+h2,
+h3 {
+  color: $color_primary_text;
+  font-family: $font_family_primary;
+  font-weight: lighter;
+}
+
+body {
+  margin: 2em;
+}
+
+body,
+input[text],
+button {
+  color: $color_primary_text;
+  font-family: $font_family_primary;
+}
+
+a {
+  cursor: pointer;
+  cursor: hand;
+}
+
+button {
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+}
+
+// button:hover {
+//   background-color: $color_primary_light;
+// }
+
+button:disabled {
+  background-color: #eee;
+  color: #aaa;
+  cursor: auto;
+}
+
+/* Navigation link styles */
+nav a {
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-right: 10px;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #eee;
+  border-radius: 4px;
+}
+
+nav a:visited,
+a:link {
+  // color: $color_primary_dark;
+}
+
+nav a:hover {
+  color: $color_primary_dark;
+  background-color: #CFD8DC;
+}
+
+nav a.active {
+  color: $color_primary;
+}
+
+/* everywhere else */
+* {
+  font-family: $font_family_primary;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}

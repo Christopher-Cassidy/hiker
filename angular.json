@@ -19,12 +19,13 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
+              "src/web.config",
               "src/favicon.ico",
               "src/assets",
               "src/images"              
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "src/styles/material.theme.custom.forest.scss"
             ],
             "scripts": []
@@ -82,7 +83,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "src/styles/material.theme.custom.forest.scss"
             ],
             "scripts": [],

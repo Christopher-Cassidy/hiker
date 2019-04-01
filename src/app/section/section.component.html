@@ -1,0 +1,21 @@
+<div *ngIf="section">
+  <mat-card>
+    <mat-card-title>{{section.title}}</mat-card-title>
+    <mat-card-content>
+      <div>
+        <p>
+          {{section.description}}
+        </p>
+      </div>
+      <div *ngIf="section.gallery">
+        <app-gallery [images]="section.gallery"></app-gallery>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="map-container" *ngIf="section.mapDataUrl">
+    <agm-map>
+      <agm-kml-layer [url]="section.mapDataUrl"></agm-kml-layer>
+    </agm-map>
+  </div>
+</div>
