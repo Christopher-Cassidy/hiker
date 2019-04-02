@@ -1,13 +1,14 @@
 <div class="sidenav">
   <div class="sidenav__header">    
     <img src="/images/hiker.png" style="height: 156px;" />
+    <app-login></app-login>
   </div>
   <div class="sidenav__links" (click)="toggle($event)">
     <button mat-icon-button [routerLink]="['/hikes']" routerLinkActive="router-link-active">
       <mat-icon aria-hidden="false" aria-label="All Hikes">Home</mat-icon>
       <span>Hikes</span>
     </button>
-    <button mat-icon-button [routerLink]="['/admin/hikes']" routerLinkActive="router-link-active">
+    <button mat-icon-button *ngIf="auth.user" [routerLink]="['/admin/hikes']" routerLinkActive="router-link-active">
       <mat-icon aria-hidden="false" aria-label="Create a hike">Add</mat-icon>
       <span>Create</span>
     </button>

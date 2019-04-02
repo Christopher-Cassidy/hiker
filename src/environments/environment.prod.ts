@@ -8,5 +8,9 @@ export const environment = {
     projectId: "hiker-cc",
     storageBucket: "hiker-cc.appspot.com",
     messagingSenderId: "1075335095329"
+  },
+  spa: {
+    useHash: true,
+    enableTracing: false,
   }
 };

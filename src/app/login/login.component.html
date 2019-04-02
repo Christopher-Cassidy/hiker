@@ -1,0 +1,29 @@
+<div *ngIf="auth.user" class="profile">
+  <img [src]="auth.user.photoURL" width="90"/><span>{{auth.user.displayName}}</span>
+  <div class="logout">
+    <button (click)="auth.logout()">Logout</button>
+  </div>
+</div>
+
+<div *ngIf="!auth.user">
+  <div class="login">
+    <div class="login--classic">
+      <input type="text" class="form-control mb-2" placeholder="Email" #userEmail required autofocus>
+      <input type="password" class="form-control mb-2" placeholder="Password" #userPassword required>
+      <button class="btn btn-lg btn-primary btn-block mb-1" (click)="auth.login(userEmail, userPassword)">Login</button>
+    </div>
+    <div class="login--google">
+      <button class="btn btn-lg btn-primary btn-block mb-1" (click)="auth.googleLogin()">Login using Google</button>
+    </div>
+  </div>
+
+  <div class="register" *ngIf="showRegister">
+    <div class="login--classic">
+      <input type="text" class="form-control mb-2" placeholder="DisplayName" #userDisplayName required autofocus>
+      <input type="text" class="form-control mb-2" placeholder="Email" #userEmail required autofocus>
+      <input type="password" class="form-control mb-2" placeholder="Password" #userPassword required>
+      <button class="btn btn-lg btn-primary btn-block mb-1"
+        (click)="auth.register(userDisplayName, userEmail, userPassword)">Register</button>
+    </div>
+  </div>
+</div>

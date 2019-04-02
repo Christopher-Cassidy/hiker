@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -6,9 +7,12 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./side-nav.component.scss']
 })
 export class SideNavComponent implements OnInit {
+  auth : AuthService;
   @Output() toggleSidenav = new EventEmitter();
-
-  constructor() { }
+  
+  constructor(auth : AuthService) { 
+    this.auth = auth;
+  }
 
   ngOnInit() {
   }

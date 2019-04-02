@@ -1,7 +1,7 @@
-import { NgModule }       from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
-import { HttpClientModule }    from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -9,26 +9,25 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatTabsModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatIconModule, MatMenuModule, MatToolbarModule, MatCardModule, MatDividerModule, MatSidenavModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTabsModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatIconModule, MatMenuModule, MatToolbarModule, MatCardModule, MatDividerModule, MatSidenavModule } from '@angular/material';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './services/in-memory-data.service';
+import { InMemoryDataService } from './services/in-memory-data.service';
 
-import { AppRoutingModule }     from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
-import { AppComponent }         from './app.component';
-import { DashboardComponent }   from './dashboard/dashboard.component';
-import { HeroDetailComponent }  from './hero-detail/hero-detail.component';
-import { HeroesComponent }      from './heroes/heroes.component';
-import { HeroSearchComponent }  from './hero-search/hero-search.component';
-import { MessagesComponent }    from './messages/messages.component';
+import { AppComponent } from './app.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeroDetailComponent } from './hero-detail/hero-detail.component';
+import { HeroesComponent } from './heroes/heroes.component';
+import { HeroSearchComponent } from './hero-search/hero-search.component';
+import { MessagesComponent } from './messages/messages.component';
 import { HikeEditorComponent } from './admin/hike-editor/hike-editor.component';
 import { SectionEditorComponent } from './admin/section-editor/section-editor.component';
 import { HtmlEditorComponent } from './admin/html-editor/html-editor.component';
 import { GalleryEditorComponent } from './admin/gallery-editor/gallery-editor.component';
 import { HikeComponent } from './hike/hike.component';
-import { environment } from 'src/environments/environment';
 import { MapEditorComponent } from './admin/map-editor/map-editor.component';
 import { AgmCoreModule } from '@agm/core';
 import { FileUploadComponent } from './admin/file-upload/file-upload.component';
@@ -41,6 +40,11 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { HikesComponent } from './hikes/hikes.component';
 import { SectionsComponent } from './sections/sections.component';
 import { SectionComponent } from './section/section.component';
+import { LoginComponent } from './login/login.component';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 export const firebaseConfig = environment.firebaseConfig;
 
@@ -54,7 +58,7 @@ export const firebaseConfig = environment.firebaseConfig;
 
     BrowserAnimationsModule,
     MatSidenavModule,
-    MatButtonModule, 
+    MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
     MatIconModule,
@@ -79,7 +83,9 @@ export const firebaseConfig = environment.firebaseConfig;
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
-    )
+    ),
+
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: true  })
   ],
   declarations: [
     AppComponent,
@@ -103,8 +109,13 @@ export const firebaseConfig = environment.firebaseConfig;
     SideNavComponent,
     HikesComponent,
     SectionsComponent,
-    SectionComponent
+    SectionComponent,
+    LoginComponent,
+    LoginFormComponent
   ],
-  bootstrap: [ AppComponent ]
+  providers: [
+    AngularFireAuth
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
